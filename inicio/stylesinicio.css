@@ -1,0 +1,14 @@
+body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
+.contenedor { display: flex; gap: 20px; flex-wrap: wrap; }
+
+
+/* Estilos de las tarjetas */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px  rgba(0,0,0,0.1);
+    width: 250px;
+}
+.card h3 { margin-top: 0; color: #333; }
+.tipo { font-weight: bold; color: #555; font-size: 0.9em; }
