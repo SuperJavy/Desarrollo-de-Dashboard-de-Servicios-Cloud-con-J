@@ -1,0 +1,22 @@
+
+
+.hero-header {
+    background: linear-gradient(180deg, #020617, #020617cc);
+    color: #ffffff;
+    padding: 40px 0;
+}
+
+.hero-header h1 {
+    font-weight: 700;
+}
+
+.hero-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.hero-header .btn:hover {
+    background-color: #ffffff;
+    color: #020617;
+}
+.contenedor { display: flex; gap: 20px; flex-wrap: wrap; }

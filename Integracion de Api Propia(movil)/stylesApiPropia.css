@@ -1,3 +1,33 @@
+header {
+    background: linear-gradient(135deg, #020617, #0F172A);
+    padding: 20px 0; 
+    text-align: center;
+    color: #E5E7EB;
+    font-weight: 600;
+    border-bottom: 3px solid #1F2937; 
+}
+
+.hero-header {
+    background: linear-gradient(180deg, #020617, #020617cc);
+    color: #ffffff;
+    padding: 40px 0;
+}
+
+.hero-header h1 {
+    font-weight: 700;
+}
+
+.hero-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.hero-header .btn:hover {
+    background-color: #ffffff;
+    color: #020617;
+}
+.contenedor { display: flex; gap: 20px; flex-wrap: wrap; }
+
 /* Estilo base para la tarjeta del personaje */
 .practice-card {
     background-color: #D3E3CD;

@@ -1,6 +1,4 @@
 body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
-.contenedor { display: flex; gap: 20px; flex-wrap: wrap; }
-
 
 /* Estilos de las tarjetas */
 .card {

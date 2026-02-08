@@ -1,0 +1,194 @@
+/* Fondo general */
+body {
+    background-color: #f6f1e3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    
+}
+
+/* Título Principal */
+h1 {
+    text-align: center;
+    color: #5a3a22; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+/* Contenedor Grid */
+#contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Tarjeta de productos  */
+.practice-card {
+    background-color: #ffffff;
+    border: 2px solid #e0c9a6; 
+    border-radius: 12px;
+    padding: 20px;
+    
+    display: flex; 
+    align-items: center;
+    flex-direction: column; 
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    cursor: pointer;
+}
+
+/* Hover */
+.practice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-color: #c9a878; 
+}
+
+/* Imagenes */
+.practice-card img {
+    width: 150px;      
+    height: 150px;      
+    object-fit: contain; 
+    margin-right: 0px;  
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    flex-shrink: 0; 
+}
+
+/* Textos */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.practice-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2c2c2c;
+    margin: 0 0 5px 0; 
+}
+
+/* Estilo para la descripción */
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Estilo para el precio */
+.card-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 8px;
+}
+
+
+/* Efecto al pasar el mouse */
+.btn-principal:hover {
+    background-color: #1e6f50; 
+    transform: scale(1.05);    
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+
+.btn-principal:active {
+    transform: scale(0.95);   
+}
+.barra_busqueda{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+                             
+}
+.boton_buscar:hover{
+    background-color: #1e6f50;
+}
+form{
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 600px;
+    height: 60px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto 40px auto;
+    padding-left: 22px;
+    padding-right: 22px;
+    
+}
+form input{
+    font-size: 18px;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+}
+form button{
+    background-color: #2d936c;
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+button i{
+    color: white;
+    font-size: 18px;
+
+}
+
+#detalle-producto {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+/* Botón de regresar en la página de detalles */
+.btn-regresar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+    background-color: #2d936c; 
+    color: #ffffff; 
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 30px;
+}
+
+.btn-regresar:hover {
+    background-color: #1e6f50;
+    color: #ffffff;
+    transform: translateX(-5px); 
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.btn-regresar i {
+    font-size: 0.9rem;
+}
+/* Elimina el color de fondo del autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset; 
+    transition: background-color 5000s ease-in-out 0s;
+}

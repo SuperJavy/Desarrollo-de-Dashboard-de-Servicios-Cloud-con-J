@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ShopMaster | Panel de Administración</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/inicio/header.css">
+</head>
+<body class="bg-light">
+    <header class="hero-header">
+    <div class="container text-center">
+        <h1 class="mb-2">Mi Portafolio Web</h1>
+        <p class="mb-4">Proyectos y prácticas de desarrollo web</p>
+        <a href="/inicio/indexinicio.html" class="btn btn-outline-light fw-semibold px-4">
+            Inicio
+        </a>
+    </div>
+    </header>
+
+<nav class="navbar navbar-dark bg-dark px-3">
+    <span class="navbar-brand">🛒 ShopMaster - Administración</span>
+
+    <form class="d-flex" id="formBusquedaProducto">
+        <input 
+            class="form-control me-2" 
+            id="inputBusquedaProducto" 
+            type="search" 
+            placeholder="Buscar producto">
+        <button class="btn btn-outline-light" id="btnBuscarProducto">
+            Buscar
+        </button>
+    </form>
+</nav>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <select class="form-select" id="selectCategoriaProducto">
+                <option value="">Todas las categorías</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <select class="form-select" id="selectOrdenProducto">
+                <option value="">Ordenar por</option>
+                <option value="price-asc">Precio ↑</option>
+                <option value="price-desc">Precio ↓</option>
+                <option value="title-asc">Título A-Z</option>
+                <option value="title-desc">Título Z-A</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 text-end">
+            <button 
+                class="btn btn-success" 
+                id="btnNuevoProducto"
+                onclick="location.href='add-product.html'">
+                ➕ Nuevo Producto
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tablaProductos">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Foto</th>
+                    <th>Título</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyTablaProductos"></tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-secondary" id="btnPaginaAnterior">
+            ⬅ Anterior
+        </button>
+
+        <span id="infoPaginacion"></span>
+
+        <button class="btn btn-secondary" id="btnPaginaSiguiente">
+            Siguiente ➡
+        </button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
