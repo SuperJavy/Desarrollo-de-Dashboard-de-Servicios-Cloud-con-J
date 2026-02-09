@@ -1,20 +1,10 @@
-.hero-header {
-    background: linear-gradient(135deg, #1d3557, #457b9d);
+.top-header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
-    padding: 40px 0;
+    padding: 25px 0;
 }
 
-.hero-header h1 {
-    font-weight: bold;
-}
-
-.hero-header p {
-    opacity: 0.9;
-}
-
-table img {
+.product-img {
     width: 60px;
-    height: 60px;
-    object-fit: cover;
     border-radius: 6px;
 }

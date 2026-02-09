@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>ShopMaster | Admin</title>
+    <title>Gestión de Productos</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -10,27 +10,20 @@
 
 <body class="bg-light">
 
-<header class="hero-header">
+<header class="top-header">
     <div class="container text-center">
-        <h1>ShopMaster</h1>
-        <p>Panel de administración</p>
-        <a href="#" class="btn btn-outline-light btn-sm">Inicio</a>
+        <h1>🛒ShopMaster</h1>
+        <p>Panel de administración de productos</p>
+        <button class="btn btn-outline-light btn-sm">Inicio</button>
     </div>
 </header>
 
 <nav class="navbar navbar-dark bg-dark px-3">
-    <span class="navbar-brand">🛒 Administración</span>
+    <span class="navbar-brand"> 🛒ShopMaster</span>
 
-    <!-- 🔴 AQUÍ ESTÁ EL FIX -->
-    <form class="d-flex" id="formBusqueda">
-        <input
-            id="inputBusqueda"
-            class="form-control me-2"
-            type="search"
-            placeholder="Buscar producto">
-        <button class="btn btn-outline-light" type="submit">
-            Buscar
-        </button>
+    <form class="d-flex" id="formSearch">
+        <input id="txtSearch" class="form-control me-2" type="search" placeholder="Buscar producto">
+        <button class="btn btn-outline-light" type="submit">Buscar</button>
     </form>
 </nav>
 
@@ -38,13 +31,13 @@
 
     <div class="row mb-3 g-3">
         <div class="col-md-4">
-            <select class="form-select" id="selectCategoria">
+            <select id="cmbCategory" class="form-select">
                 <option value="">Todas las categorías</option>
             </select>
         </div>
 
         <div class="col-md-4">
-            <select class="form-select" id="selectOrden">
+            <select id="cmbSort" class="form-select">
                 <option value="">Ordenar por</option>
                 <option value="price-asc">Precio ↑</option>
                 <option value="price-desc">Precio ↓</option>
@@ -60,15 +53,22 @@
                 <tr>
                     <th>ID</th>
                     <th>Imagen</th>
-                    <th>Título</th>
-                    <th>Precio</th>
+                    <th>Nombre</th>
                     <th>Categoría</th>
+                    <th>Precio</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="tablaProductos"></tbody>
+            <tbody id="tblProducts"></tbody>
         </table>
     </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-secondary" id="btnPrev">⬅ Anterior</button>
+        <span id="lblPage"></span>
+        <button class="btn btn-secondary" id="btnNext">Siguiente ➡</button>
+    </div>
+
 </div>
 
 <script src="app.js"></script>
