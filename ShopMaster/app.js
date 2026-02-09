@@ -1,132 +1,122 @@
-let skip = 0;
-const limite = 10;
-let totalProductos = 0;
-let filtros = {};
+let productos = []
+let productosFiltrados = []
 
-const tbodyTablaProductos = document.getElementById("tbodyTablaProductos");
-const infoPaginacion = document.getElementById("infoPaginacion");
+// ==================
+// INICIALIZACIÓN
+// ==================
+document.addEventListener("DOMContentLoaded", () => {
+    cargarProductos()
 
-function cargarProductos() {
-    let url = `https://dummyjson.com/products?limit=${limite}&skip=${skip}`;
+    document.getElementById("formBusqueda").addEventListener("submit", e => {
+        e.preventDefault()       // 🔥 EVITA EL REFRESH
+        buscarProducto()
+    })
 
-    if (filtros.busqueda) {
-        url = `https://dummyjson.com/products/search?q=${filtros.busqueda}`;
-    }
+    document.getElementById("selectCategoria").addEventListener("change", aplicarFiltros)
+    document.getElementById("selectOrden").addEventListener("change", aplicarFiltros)
+})
 
-    if (filtros.categoria) {
-        url = `https://dummyjson.com/products/category/${filtros.categoria}`;
-    }
+// ==================
+// CARGA DE PRODUCTOS
+// ==================
+async function cargarProductos() {
+    const res = await fetch("https://dummyjson.com/products?limit=50")
+    const data = await res.json()
 
-    if (filtros.orden) {
-        url += `&sortBy=${filtros.orden.campo}&order=${filtros.orden.tipo}`;
-    }
+    productos = data.products
+    productosFiltrados = [...productos]
 
-    fetch(url)
-        .then(respuesta => respuesta.json())
-        .then(datos => {
-            totalProductos = datos.total || datos.products.length;
-            renderizarTablaProductos(datos.products);
-            actualizarInfoPaginacion();
-        });
+    cargarCategorias()
+    pintarTabla()
 }
 
-function renderizarTablaProductos(productos) {
-    tbodyTablaProductos.innerHTML = "";
+// ==================
+// CATEGORÍAS
+// ==================
+function cargarCategorias() {
+    const select = document.getElementById("selectCategoria")
+    const categorias = [...new Set(productos.map(p => p.category))]
 
-    productos.forEach(producto => {
-        tbodyTablaProductos.innerHTML += `
+    categorias.forEach(cat => {
+        const option = document.createElement("option")
+        option.value = cat
+        option.textContent = cat
+        select.appendChild(option)
+    })
+}
+
+// ==================
+// TABLA
+// ==================
+function pintarTabla() {
+    const tbody = document.getElementById("tablaProductos")
+    tbody.innerHTML = ""
+
+    productosFiltrados.forEach(p => {
+        tbody.innerHTML += `
             <tr>
-                <td>${producto.id}</td>
+                <td>${p.id}</td>
+                <td><img src="${p.thumbnail}" width="60"></td>
+                <td>${p.title}</td>
+                <td>$${p.price}</td>
+                <td>${p.category}</td>
                 <td>
-                    <img src="${producto.thumbnail}" width="50">
-                </td>
-                <td>${producto.title}</td>
-                <td>$${producto.price}</td>
-                <td>${producto.category}</td>
-                <td>
-                    <button class="btn btn-sm btn-warning">
-                        Editar
-                    </button>
-                    <button 
-                        class="btn btn-sm btn-danger"
-                        onclick="eliminarProducto(${producto.id})">
+                    <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${p.id})">
                         Eliminar
                     </button>
                 </td>
             </tr>
-        `;
-    });
-}
-
-function actualizarInfoPaginacion() {
-    const paginaActual = Math.floor(skip / limite) + 1;
-    const totalPaginas = Math.ceil(totalProductos / limite);
-    infoPaginacion.textContent = `Página ${paginaActual} de ${totalPaginas}`;
-}
-
-document.getElementById("btnPaginaSiguiente").onclick = () => {
-    if (skip + limite < totalProductos) {
-        skip += limite;
-        cargarProductos();
-    }
-};
-
-document.getElementById("btnPaginaAnterior").onclick = () => {
-    if (skip > 0) {
-        skip -= limite;
-        cargarProductos();
-    }
-};
-
-document.getElementById("formBusquedaProducto").addEventListener("submit", evento => {
-    evento.preventDefault();
-    filtros.busqueda = document.getElementById("inputBusquedaProducto").value;
-    skip = 0;
-    cargarProductos();
-});
-
-fetch("https://dummyjson.com/products/category-list")
-    .then(respuesta => respuesta.json())
-    .then(categorias => {
-        const selectCategoria = document.getElementById("selectCategoriaProducto");
-        categorias.forEach(categoria => {
-            selectCategoria.innerHTML += `
-                <option value="${categoria}">
-                    ${categoria}
-                </option>`;
-        });
-    });
-
-document.getElementById("selectCategoriaProducto").onchange = evento => {
-    filtros.categoria = evento.target.value || null;
-    skip = 0;
-    cargarProductos();
-};
-
-document.getElementById("selectOrdenProducto").onchange = evento => {
-    const valor = evento.target.value;
-
-    if (!valor) {
-        filtros.orden = null;
-    } else {
-        const [campo, tipo] = valor.split("-");
-        filtros.orden = { campo, tipo };
-    }
-
-    cargarProductos();
-};
-
-function eliminarProducto(idProducto) {
-    if (!confirm("¿Eliminar producto?")) return;
-
-    fetch(`https://dummyjson.com/products/${idProducto}`, {
-        method: "DELETE"
+        `
     })
-    .then(respuesta => respuesta.json())
-    .then(() => {
-        alert("Producto eliminado correctamente (simulado)");
-        cargarProductos();
-    });
 }
 
-cargarProductos();
+// ==================
+// BUSCAR
+// ==================
+function buscarProducto() {
+    const texto = document.getElementById("inputBusqueda").value.toLowerCase()
+
+    productosFiltrados = productos.filter(p =>
+        p.title.toLowerCase().includes(texto)
+    )
+
+    aplicarFiltros(false)
+}
+
+// ==================
+// FILTROS + ORDEN
+// ==================
+function aplicarFiltros(reaplicarBusqueda = true) {
+    let resultado = [...productos]
+
+    const categoria = document.getElementById("selectCategoria").value
+    const orden = document.getElementById("selectOrden").value
+    const texto = document.getElementById("inputBusqueda").value.toLowerCase()
+
+    if (categoria) {
+        resultado = resultado.filter(p => p.category === categoria)
+    }
+
+    if (texto && reaplicarBusqueda) {
+        resultado = resultado.filter(p =>
+            p.title.toLowerCase().includes(texto)
+        )
+    }
+
+    if (orden === "price-asc") resultado.sort((a, b) => a.price - b.price)
+    if (orden === "price-desc") resultado.sort((a, b) => b.price - a.price)
+    if (orden === "title-asc") resultado.sort((a, b) => a.title.localeCompare(b.title))
+    if (orden === "title-desc") resultado.sort((a, b) => b.title.localeCompare(a.title))
+
+    productosFiltrados = resultado
+    pintarTabla()
+}
+
+// ==================
+// ELIMINAR
+// ==================
+function eliminarProducto(id) {
+    productos = productos.filter(p => p.id !== id)
+    productosFiltrados = productosFiltrados.filter(p => p.id !== id)
+    pintarTabla()
+}
