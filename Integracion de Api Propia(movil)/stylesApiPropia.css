@@ -68,7 +68,7 @@ header {
 h1 {
     text-align: center;
     margin-top: 20px;
-    color: #E5E7EB; /* Color del texto */
+    color:black; /* Color del texto */
     font-family: 'Segoe UI', sans-serif;
 }
 body {
