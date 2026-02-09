@@ -111,7 +111,6 @@ const removeItem = (id, btn) => {
         .then(() => btn.closest("tr").remove());
 };
 
-// EVENTOS
 document.getElementById("formSearch").addEventListener("submit", e => {
     e.preventDefault();
     start = 0;
