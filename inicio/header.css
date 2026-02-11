@@ -1,22 +1,85 @@
+:root {
+    --bg-dark: #050505;
+    --accent: #64ffda;
+    --accent-glow: rgba(100, 255, 218, 0.2);
+    --text-primary: #ffffff;
+}
 
 
 .hero-header {
-   background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #ffffff;
-    padding: 40px 0;
+    background: linear-gradient(135deg, #020617, #0F172A);
+    color: var(--text-primary);
+    padding: 80px 0; 
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+
+.hero-header::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 400px; height: 400px;
+    background: var(--accent-glow);
+    filter: blur(100px);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
 }
 
 .hero-header h1 {
-    font-weight: 700;
+    font-size: 4rem; 
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: -2px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-header p {
-    font-size: 1.1rem;
+    font-size: 1.5rem; 
     opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #ccd6f6;
+    position: relative;
+    z-index: 1;
+}
+
+
+.hero-header .btn {
+    display: inline-block;
+    padding: 14px 35px;
+    font-weight: 700;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-header .btn:hover {
-    background-color: #ffffff;
+    background-color: var(--accent);
     color: #020617;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: scale(1.05);
 }
-.contenedor { display: flex; gap: 20px; flex-wrap: wrap; }
+
+
+.contenedor { 
+    display: flex; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    padding: 40px 20px;
+}

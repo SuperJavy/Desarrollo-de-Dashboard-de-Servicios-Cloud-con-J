@@ -1,74 +1,98 @@
+:root {
+    --bg-dark: #050505;
+    --card-bg: rgba(20, 20, 25, 0.8);
+    --accent: #64ffda;
+    --accent-glow: rgba(100, 255, 218, 0.2);
+    --text-primary: #ffffff;
+    --text-secondary: #ccd6f6;
+    --text-dim: #8892b0;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
 
 body {
-    background: linear-gradient(180deg, #E5E7EB 0%, #F9FAFB 100%);
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(var(--accent) 1px, transparent 1px),
+        radial-gradient(circle at 10% 10%, #112240 0%, transparent 50%);
+    background-size: 40px 40px, 100% 100%;
+    background-attachment: fixed;
     text-align: center;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-h1 {
-    margin-top: 20px;
-    color: white;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: var(--text-primary);
 }
 
 header {
     background: linear-gradient(135deg, #020617, #0F172A);
-    padding: 20px 0; 
+    padding: 60px 0; 
     text-align: center;
-    color: #E5E7EB;
-    font-weight: 600;
-    border-bottom: 3px solid #1F2937; 
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 0 30px var(--accent-glow);
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .practice-card {
-    background-color: #D3E3CD;
-    border: 3px solid #1F2937; 
-    border-radius: 16px; 
-    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px; 
+    padding: 2.5rem;
     text-decoration: none;
-    color: #000000;
+    color: var(--text-secondary);
     height: 100%; 
     display: flex; 
     flex-direction: column;         
     justify-content: space-between;     
-    transition: all 0.35s ease;            
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);            
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
 }
-
 
 .practice-card:hover {
-    border-color: #000000;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35); 
-    transform: translateY(-8px) scale(1.02); 
+    border-color: var(--accent);
+    box-shadow: 0 0 25px var(--accent-glow); 
+    transform: translateY(-12px) scale(1.02);
+    background: rgba(100, 255, 218, 0.03);
 }
-
 
 .practice-title {
-    color: #0F172A; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-    font-size: 1.4rem; 
+    color: var(--accent); 
+    font-weight: 800; 
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    letter-spacing: -0.5px;
 }
-
 
 .practice-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-dim);
 }
-
 
 .practice-card span {
-    margin-top: auto;
-    font-weight: 600;
-    color: #007A3D;
+    margin-top: 25px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
-
 footer {
-    background-color: #1F2937;
-    color: #E5E7EB;
-    padding: 14px 0; 
-    margin-top: 50px; 
-    font-size: 0.9rem; 
+    background-color: #020617;
+    color: var(--text-dim);
+    padding: 30px 0; 
+    margin-top: 80px; 
+    font-size: 1rem; 
+    border-top: 1px solid var(--glass-border);
 }
