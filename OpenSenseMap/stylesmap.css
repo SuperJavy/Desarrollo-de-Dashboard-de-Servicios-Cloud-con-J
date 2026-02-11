@@ -13,16 +13,15 @@ body {
     text-align: center; 
 }
 
-/* Header con más impacto */
 .hero-header { 
     background: linear-gradient(180deg, #1e293b 0%, #020617 100%);
-    padding: 80px 20px; 
+    padding: 60px 20px; 
     border-bottom: 2px solid var(--accent);
     box-shadow: 0 4px 30px rgba(100, 255, 218, 0.1);
 }
 
 h1 { 
-    font-size: 4.5rem; 
+    font-size: 3.5rem; 
     color: var(--accent); 
     margin: 0; 
     text-transform: uppercase;
@@ -30,7 +29,51 @@ h1 {
     text-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
 }
 
-/* Botón con efecto neón */
+.contenedor-filtros {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#buscador {
+    padding: 12px 25px;
+    width: 320px;
+    border-radius: 50px;
+    border: 1px solid var(--accent);
+    background: rgba(100, 255, 218, 0.05);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+#buscador:focus {
+    box-shadow: 0 0 15px var(--accent);
+    background: rgba(100, 255, 218, 0.1);
+}
+
+.categorias {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-categoria {
+    padding: 8px 20px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.btn-categoria:hover {
+    background: var(--accent);
+    color: #000;
+}
+
 .btn { 
     padding: 15px 40px; 
     border: 2px solid var(--accent); 
@@ -38,7 +81,6 @@ h1 {
     color: var(--accent); 
     font-weight: bold; 
     cursor: pointer; 
-    margin-top: 30px;
     border-radius: 50px;
     transition: 0.3s;
 }
@@ -49,7 +91,6 @@ h1 {
     box-shadow: 0 0 20px var(--accent);
 }
 
-/* Contenedor más organizado */
 .contenedor { 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -59,7 +100,6 @@ h1 {
     margin: 0 auto;
 }
 
-/* Tarjetas con estilo de cristal */
 .practice-card { 
     background: var(--card); 
     border: 1px solid rgba(100, 255, 218, 0.1); 
@@ -75,19 +115,13 @@ h1 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.practice-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.4rem;
-}
-
-/* Modal Pro */
 .modal { 
     display: none; 
     position: fixed; 
     top: 0; left: 0; 
     width: 100%; height: 100%; 
     background: rgba(0,0,0,0.85); 
-    backdrop-filter: blur(10px); /* Desenfoque de fondo */
+    backdrop-filter: blur(10px);
     z-index: 1000; 
     align-items: center; 
     justify-content: center; 
@@ -101,6 +135,7 @@ h1 {
     width: 90%; 
     max-width: 500px; 
     position: relative; 
+    text-align: left;
 }
 
 .close { 
@@ -111,7 +146,6 @@ h1 {
     color: var(--accent); 
 }
 
-/* Items de sensores */
 .sensor-item { 
     background: rgba(255,255,255,0.03); 
     padding: 15px 20px; 
@@ -120,4 +154,42 @@ h1 {
     display: flex; 
     justify-content: space-between;
     border-left: 4px solid var(--accent);
+}
+
+.api-info {
+    margin: 50px auto;
+    padding: 30px;
+    max-width: 900px;
+    background: rgba(100, 255, 218, 0.05);
+    border-radius: 15px;
+    border: 1px dashed var(--accent);
+    text-align: left;
+}
+
+.api-info h3 {
+    color: var(--accent);
+    margin-top: 0;
+}
+
+.info-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    flex: 1;
+    min-width: 250px;
+}
+
+.info-item strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.5;
 }

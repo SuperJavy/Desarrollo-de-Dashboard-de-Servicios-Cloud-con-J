@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenSenseMap</title>
+    <title>OpenSenseMap Dashboard</title>
     <link rel="stylesheet" href="stylesmap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
 </head>
@@ -11,16 +11,20 @@
 
     <header class="hero-header">
         <h1>OpenSenseMap</h1>
-        <p>Monitoreo global de sensores ambientales en tiempo real</p>
-        <button class="btn" onclick="loadBoxes()">ACTUALIZAR RED</button>
+        <p>Monitoreo ambiental en tiempo real</p>
+        
+        <div class="contenedor-filtros">
+            <input type="text" id="buscador" placeholder="🔍 Buscar por nombre de estación..." oninput="filtrarPorNombre()">
+        </div>
+
+        <button class="btn" onclick="obtenerEstaciones()">ACTUALIZAR RED</button>
     </header>
 
-    <main class="contenedor" id="listado-estaciones">
-        </main>
+    <main class="contenedor" id="listado-estaciones"></main>
 
     <div id="modal-detalle" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="cerrarModal()">&times;</span>
             <div id="detalle-contenido"></div>
         </div>
     </div>

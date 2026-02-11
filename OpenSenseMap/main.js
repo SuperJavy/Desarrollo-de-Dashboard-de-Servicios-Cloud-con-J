@@ -1,76 +1,79 @@
-const API_URL = 'https://api.opensensemap.org';
+const URL_API = 'https://api.opensensemap.org';
+let estacionesGlobales = [];
 
-// 1. Obtener y mostrar las estaciones (Endpoint 1)
-async function loadBoxes() {
-    const container = document.getElementById('listado-estaciones');
-    container.innerHTML = '<h3>Cargando estaciones...</h3>';
+const obtenerEstaciones = async () => {
+    const contenedor = document.getElementById('listado-estaciones');
+    contenedor.innerHTML = '<h3>Cargando estaciones...</h3>';
 
     try {
-        const res = await fetch(`${API_URL}/boxes?minimal=true&per_page=12`);
-        const boxes = await res.json();
-
-        container.innerHTML = ''; // Limpiar mensaje de carga
-
-        boxes.forEach(box => {
-            // Creamos la tarjeta
-            const card = document.createElement('div');
-            card.className = 'practice-card';
-            
-            card.innerHTML = `
-                <h3 style="color: var(--accent)">${box.name}</h3>
-                <p>Modelo: ${box.model || 'SenseBox'}</p>
-                <small>Ver sensores</small>
-            `;
-
-            // Al hacer clic, pedimos el detalle (Endpoint 2)
-            card.onclick = async () => {
-                try {
-                    const resDetail = await fetch(`${API_URL}/boxes/${box._id}`);
-                    const detail = await resDetail.json();
-                    showModal(detail);
-                } catch (err) {
-                    alert("Error al cargar detalles");
-                }
-            };
-
-            container.appendChild(card);
-        });
+        const respuesta = await fetch(`${URL_API}/boxes?minimal=true&per_page=50`);
+        estacionesGlobales = await respuesta.json();
+        dibujarTarjetas(estacionesGlobales);
     } catch (error) {
-        container.innerHTML = '<h3>Error al conectar con la API</h3>';
+        contenedor.innerHTML = '<h3>Error al conectar con la API</h3>';
     }
-}
+};
 
-// 2. Función para armar y mostrar el modal
-function showModal(data) {
-    const content = document.getElementById('detalle-contenido');
-    
-    // Creamos la lista de sensores con un simple loop
-    let sensorsHtml = '';
-    data.sensors.forEach(s => {
-        sensorsHtml += `
+const dibujarTarjetas = (lista) => {
+    const contenedor = document.getElementById('listado-estaciones');
+    contenedor.innerHTML = '';
+
+    lista.forEach(estacion => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'practice-card';
+        tarjeta.innerHTML = `
+            <h3 style="color: var(--accent)">${estacion.name}</h3>
+            <p>ID: ${estacion._id.substring(0, 8)}...</p>
+            <small>Ver sensores</small>
+        `;
+        tarjeta.onclick = () => obtenerDetalle(estacion._id);
+        contenedor.appendChild(tarjeta);
+    });
+};
+
+const filtrarPorNombre = () => {
+    const texto = document.getElementById('buscador').value.toLowerCase();
+    const filtradas = estacionesGlobales.filter(est => 
+        est.name.toLowerCase().includes(texto)
+    );
+    dibujarTarjetas(filtradas);
+};
+
+const obtenerDetalle = async (id) => {
+    try {
+        const respuesta = await fetch(`${URL_API}/boxes/${id}`);
+        const datos = await respuesta.json();
+        mostrarModal(datos);
+    } catch (error) {
+        alert("Error al obtener detalle");
+    }
+};
+
+const mostrarModal = (datos) => {
+    const contenido = document.getElementById('detalle-contenido');
+    let sensoresHtml = '';
+
+    datos.sensors.forEach(s => {
+        const valor = s.lastMeasurement ? s.lastMeasurement.value : '--';
+        sensoresHtml += `
             <div class="sensor-item">
                 <span>${s.title}</span>
-                <strong style="color: var(--accent)">
-                    ${s.lastMeasurement ? s.lastMeasurement.value : '--'} ${s.unit}
-                </strong>
+                <strong style="color: var(--accent)">${valor} ${s.unit}</strong>
             </div>
         `;
     });
 
-    content.innerHTML = `
-        <h2 style="color: var(--accent)">${data.name}</h2>
-        <p>Reporte: ${new Date(data.updatedAt).toLocaleString()}</p>
-        <hr style="border: 0; border-top: 1px solid #374151">
-        <div>${sensorsHtml}</div>
+    contenido.innerHTML = `
+        <h2>${datos.name}</h2>
+        <p>Última actualización: ${new Date(datos.updatedAt).toLocaleString()}</p>
+        <hr style="border:0; border-top:1px solid #334155; margin:10px 0;">
+        ${sensoresHtml}
     `;
-
     document.getElementById('modal-detalle').style.display = 'flex';
-}
+};
 
-// 3. Función para cerrar el modal
-function closeModal() {
+const cerrarModal = () => {
     document.getElementById('modal-detalle').style.display = 'none';
-}
+};
 
-// Arrancar la app
-loadBoxes();
+obtenerEstaciones();
