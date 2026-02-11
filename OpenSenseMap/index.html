@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenSenseMap</title>
+    <link rel="stylesheet" href="stylesmap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
+</head>
+<body>
+
+    <header class="hero-header">
+        <h1>OpenSenseMap</h1>
+        <p>Monitoreo global de sensores ambientales en tiempo real</p>
+        <button class="btn" onclick="loadBoxes()">ACTUALIZAR RED</button>
+    </header>
+
+    <main class="contenedor" id="listado-estaciones">
+        </main>
+
+    <div id="modal-detalle" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="detalle-contenido"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
