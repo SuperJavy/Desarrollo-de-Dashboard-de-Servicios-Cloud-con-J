@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea Cloudinary - Práctica</title>
+    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href=" ../portafolio.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Subir Imagen a la Nube</h1>
+        
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <button id="btnSubir">Subir a Cloudinary</button>
+
+        <div id="status-container">
+            <p id="statusMsg"></p>
+            <div id="spinner" class="hidden"></div>
+        </div>
+
+        <div id="preview-container">
+            <img id="imagen" src="" alt="Vista previa" style="display: none; width: 300px; margin-top: 15px;">
+        </div>
+        
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
